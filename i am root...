@@ -1,3 +1,5 @@
+##dont actually use this. it will change your password. Jeremy is funny :P
+
 #!/bin/bash
 suser=$(getent group wheel | awk -F: '{print $4}')
 if [[ "$EUID" = 0 ]] || [[ "$suser" == "$USER" ]] ; then

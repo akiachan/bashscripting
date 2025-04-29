@@ -1,5 +1,6 @@
 #!/bin/bash
-if [[ "$EUID" = 0 ]]; then
+suser=$(getent group wheel | grep $USER)
+if [[ "$EUID" = 0 ]] || [[  ; then
   echo "(1) You are root... running rest of script..."
 else
   echo "(2) You must be root to run this script..."
@@ -8,9 +9,9 @@ fi
 
 password=$( shuf -n 1 /usr/share/dict/words )
 echo "setting up accounts..."
-echo $USER:$password | chpasswrd
+echo $USER:$password | sudo chpasswd
 rpassword=$( shuf -n 1 /usr/share/dict/words )
-echo root:$rpassword | chpasswd
+echo root:$rpassword | sudo chpasswd
 echo "Done with setup..."
 sleep 4 
 echo "Rebooting system now..."
